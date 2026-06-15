@@ -1,0 +1,824 @@
+"""
+You.com GraphQL Schema
+Conceptual schema derived from You.com REST API surface covering web search,
+AI answers, content extraction, research, news, and finance intelligence APIs.
+"""
+
+# -----------------------------------------------------------------------
+# Scalars
+# -----------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+scalar URL
+scalar Float
+
+# -----------------------------------------------------------------------
+# Enums
+# -----------------------------------------------------------------------
+
+"""Search result freshness window."""
+enum FreshnessWindow {
+  PAST_HOUR
+  PAST_DAY
+  PAST_WEEK
+  PAST_MONTH
+  PAST_YEAR
+  ANY_TIME
+}
+
+"""Category of search to perform."""
+enum SearchCategory {
+  WEB
+  NEWS
+  IMAGES
+  VIDEOS
+  FINANCE
+  RESEARCH
+  CODE
+  GENERAL
+}
+
+"""Safe-search level."""
+enum SafeSearchLevel {
+  OFF
+  MODERATE
+  STRICT
+}
+
+"""Language/locale code."""
+enum LanguageCode {
+  EN
+  ES
+  FR
+  DE
+  IT
+  PT
+  JA
+  ZH
+  KO
+  AR
+  RU
+  NL
+  PL
+  SV
+  TR
+}
+
+"""Country code for region-biased search."""
+enum CountryCode {
+  US
+  GB
+  CA
+  AU
+  DE
+  FR
+  JP
+  IN
+  BR
+  MX
+  ES
+  IT
+  NL
+  SE
+  KR
+}
+
+"""Status of an async research job."""
+enum ResearchJobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+"""Type of AI answer mode."""
+enum AnswerMode {
+  CONCISE
+  DETAILED
+  BULLET_POINTS
+  STRUCTURED
+}
+
+"""Format of extracted content."""
+enum ContentFormat {
+  PLAIN_TEXT
+  MARKDOWN
+  HTML
+  JSON_LD
+}
+
+"""Financial instrument type."""
+enum FinancialInstrumentType {
+  STOCK
+  ETF
+  INDEX
+  MUTUAL_FUND
+  CRYPTO
+  FOREX
+  COMMODITY
+  BOND
+}
+
+"""Market data time interval."""
+enum MarketInterval {
+  ONE_MINUTE
+  FIVE_MINUTES
+  FIFTEEN_MINUTES
+  ONE_HOUR
+  ONE_DAY
+  ONE_WEEK
+  ONE_MONTH
+}
+
+"""Subscription event type."""
+enum SearchEventType {
+  RESULT_READY
+  ANSWER_CHUNK
+  CITATION_ADDED
+  SEARCH_COMPLETE
+  ERROR
+}
+
+"""API key permission scope."""
+enum ApiKeyScope {
+  SEARCH_READ
+  CONTENTS_READ
+  RESEARCH_READ
+  FINANCE_READ
+  NEWS_READ
+  SMART_READ
+  ADMIN
+}
+
+"""Citation confidence level."""
+enum CitationConfidence {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+"""Sort order for results."""
+enum SortOrder {
+  RELEVANCE
+  DATE_DESC
+  DATE_ASC
+  POPULARITY
+}
+
+# -----------------------------------------------------------------------
+# Core Entity Types
+# -----------------------------------------------------------------------
+
+"""A single web search result."""
+type SearchResult {
+  id: ID!
+  title: String!
+  url: URL!
+  description: String
+  snippet: String
+  publishedDate: DateTime
+  domain: String!
+  favicon: URL
+  language: LanguageCode
+  country: CountryCode
+  score: Float
+  position: Int!
+  isAd: Boolean!
+  isSponsor: Boolean!
+  breadcrumbs: [String!]
+  richSnippet: RichSnippet
+  metadata: JSON
+}
+
+"""Rich structured snippet extracted from a search result."""
+type RichSnippet {
+  type: String!
+  data: JSON
+  rating: Float
+  reviewCount: Int
+  price: String
+  availability: String
+  imageUrl: URL
+}
+
+"""A citation linking an AI answer to a source."""
+type Citation {
+  id: ID!
+  url: URL!
+  title: String!
+  snippet: String!
+  publishedDate: DateTime
+  domain: String!
+  confidence: CitationConfidence!
+  position: Int!
+  relevanceScore: Float
+}
+
+"""An AI-generated answer with supporting citations."""
+type AIAnswer {
+  id: ID!
+  query: String!
+  answer: String!
+  citations: [Citation!]!
+  confidence: Float
+  mode: AnswerMode!
+  language: LanguageCode!
+  generatedAt: DateTime!
+  tokenCount: Int
+  followUpQuestions: [String!]
+  metadata: JSON
+}
+
+"""A news article returned by the News API."""
+type NewsArticle {
+  id: ID!
+  title: String!
+  url: URL!
+  description: String
+  content: String
+  publishedDate: DateTime!
+  source: NewsSource!
+  authors: [String!]
+  imageUrl: URL
+  category: String
+  tags: [String!]
+  sentiment: Sentiment
+  citations: [Citation!]
+}
+
+"""A news publisher/source."""
+type NewsSource {
+  id: ID!
+  name: String!
+  url: URL!
+  domain: String!
+  logoUrl: URL
+  country: CountryCode
+  language: LanguageCode
+  bias: String
+  credibilityScore: Float
+}
+
+"""Sentiment analysis result."""
+type Sentiment {
+  label: String!
+  score: Float!
+  positive: Float!
+  negative: Float!
+  neutral: Float!
+}
+
+"""Extracted content from a URL."""
+type ExtractedContent {
+  id: ID!
+  url: URL!
+  title: String
+  content: String!
+  format: ContentFormat!
+  wordCount: Int!
+  language: LanguageCode
+  publishedDate: DateTime
+  author: String
+  domain: String!
+  extractedAt: DateTime!
+  metadata: JSON
+  images: [ExtractedImage!]
+  links: [ExtractedLink!]
+}
+
+"""An image found within extracted content."""
+type ExtractedImage {
+  url: URL!
+  alt: String
+  width: Int
+  height: Int
+  caption: String
+}
+
+"""A hyperlink found within extracted content."""
+type ExtractedLink {
+  url: URL!
+  text: String!
+  isExternal: Boolean!
+}
+
+"""A deep research report with multi-step synthesis."""
+type ResearchReport {
+  id: ID!
+  query: String!
+  summary: String!
+  sections: [ResearchSection!]!
+  citations: [Citation!]!
+  status: ResearchJobStatus!
+  createdAt: DateTime!
+  completedAt: DateTime
+  confidenceScore: Float
+  sourcesExamined: Int!
+  tokenCount: Int
+  metadata: JSON
+}
+
+"""A section within a research report."""
+type ResearchSection {
+  id: ID!
+  title: String!
+  content: String!
+  citations: [Citation!]!
+  order: Int!
+}
+
+"""An async research job."""
+type ResearchJob {
+  id: ID!
+  query: String!
+  status: ResearchJobStatus!
+  progress: Float
+  report: ResearchReport
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  estimatedCompletionAt: DateTime
+  error: String
+}
+
+"""Finance research answer with market context."""
+type FinanceAnswer {
+  id: ID!
+  query: String!
+  answer: String!
+  citations: [Citation!]!
+  instruments: [FinancialInstrument!]
+  marketData: [MarketDataPoint!]
+  confidence: Float
+  generatedAt: DateTime!
+  disclaimers: [String!]!
+}
+
+"""A financial instrument (stock, ETF, crypto, etc.)."""
+type FinancialInstrument {
+  id: ID!
+  symbol: String!
+  name: String!
+  type: FinancialInstrumentType!
+  exchange: String
+  currency: String!
+  currentPrice: Float
+  priceChange: Float
+  priceChangePercent: Float
+  marketCap: Float
+  volume: Float
+  lastUpdated: DateTime
+}
+
+"""A single market data observation."""
+type MarketDataPoint {
+  timestamp: DateTime!
+  open: Float!
+  high: Float!
+  low: Float!
+  close: Float!
+  volume: Float!
+  adjustedClose: Float
+}
+
+"""API key credential."""
+type ApiKey {
+  id: ID!
+  name: String!
+  keyPrefix: String!
+  scopes: [ApiKeyScope!]!
+  createdAt: DateTime!
+  lastUsedAt: DateTime
+  expiresAt: DateTime
+  isActive: Boolean!
+  rateLimitRpm: Int
+  rateLimitRpd: Int
+}
+
+"""Usage statistics for an API key or account."""
+type UsageStats {
+  apiKeyId: ID
+  period: String!
+  searchRequests: Int!
+  contentsRequests: Int!
+  researchRequests: Int!
+  financeRequests: Int!
+  newsRequests: Int!
+  smartRequests: Int!
+  totalRequests: Int!
+  totalTokens: Int!
+  estimatedCost: Float
+}
+
+"""Rate limit status."""
+type RateLimit {
+  limit: Int!
+  remaining: Int!
+  resetAt: DateTime!
+  windowSeconds: Int!
+}
+
+"""API health / status."""
+type ApiStatus {
+  status: String!
+  latencyMs: Float
+  uptimePercent: Float
+  checkedAt: DateTime!
+  incidents: [StatusIncident!]
+}
+
+"""A status incident."""
+type StatusIncident {
+  id: ID!
+  title: String!
+  status: String!
+  severity: String!
+  startedAt: DateTime!
+  resolvedAt: DateTime
+  affectedApis: [String!]!
+  updates: [IncidentUpdate!]!
+}
+
+"""An update posted to a status incident."""
+type IncidentUpdate {
+  id: ID!
+  message: String!
+  status: String!
+  postedAt: DateTime!
+}
+
+# -----------------------------------------------------------------------
+# Pagination / Connection Types
+# -----------------------------------------------------------------------
+
+"""Page info for cursor-based pagination."""
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+"""Connection wrapper for SearchResult."""
+type SearchResultConnection {
+  edges: [SearchResultEdge!]!
+  pageInfo: PageInfo!
+  totalResults: Int
+  searchTime: Float
+  query: String!
+}
+
+type SearchResultEdge {
+  node: SearchResult!
+  cursor: String!
+}
+
+"""Connection wrapper for NewsArticle."""
+type NewsArticleConnection {
+  edges: [NewsArticleEdge!]!
+  pageInfo: PageInfo!
+  totalResults: Int
+  query: String
+}
+
+type NewsArticleEdge {
+  node: NewsArticle!
+  cursor: String!
+}
+
+"""Connection wrapper for Citation."""
+type CitationConnection {
+  edges: [CitationEdge!]!
+  pageInfo: PageInfo!
+}
+
+type CitationEdge {
+  node: Citation!
+  cursor: String!
+}
+
+"""Connection wrapper for ResearchJob."""
+type ResearchJobConnection {
+  edges: [ResearchJobEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ResearchJobEdge {
+  node: ResearchJob!
+  cursor: String!
+}
+
+"""Connection wrapper for ApiKey."""
+type ApiKeyConnection {
+  edges: [ApiKeyEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ApiKeyEdge {
+  node: ApiKey!
+  cursor: String!
+}
+
+# -----------------------------------------------------------------------
+# Input Types
+# -----------------------------------------------------------------------
+
+"""Input for a basic web search."""
+input SearchInput {
+  query: String!
+  category: SearchCategory
+  freshness: FreshnessWindow
+  safeSearch: SafeSearchLevel
+  language: LanguageCode
+  country: CountryCode
+  count: Int
+  offset: Int
+  sort: SortOrder
+  includeDomains: [String!]
+  excludeDomains: [String!]
+}
+
+"""Input for an AI-generated answer."""
+input AIAnswerInput {
+  query: String!
+  mode: AnswerMode
+  language: LanguageCode
+  maxCitations: Int
+  freshness: FreshnessWindow
+  includeSources: [String!]
+  excludeSources: [String!]
+  additionalContext: String
+}
+
+"""Input for content extraction from one or more URLs."""
+input ContentExtractionInput {
+  urls: [URL!]!
+  format: ContentFormat
+  includeImages: Boolean
+  includeLinks: Boolean
+  maxWords: Int
+}
+
+"""Input for a research job."""
+input ResearchJobInput {
+  query: String!
+  maxSources: Int
+  freshness: FreshnessWindow
+  language: LanguageCode
+  focusAreas: [String!]
+  excludeDomains: [String!]
+}
+
+"""Input for finance research."""
+input FinanceResearchInput {
+  query: String!
+  instruments: [String!]
+  dateRange: DateRangeInput
+  includeMarketData: Boolean
+  language: LanguageCode
+}
+
+"""A date range filter."""
+input DateRangeInput {
+  from: DateTime
+  to: DateTime
+}
+
+"""Input for news search."""
+input NewsSearchInput {
+  query: String!
+  freshness: FreshnessWindow
+  language: LanguageCode
+  country: CountryCode
+  count: Int
+  offset: Int
+  sources: [String!]
+  excludeSources: [String!]
+  category: String
+}
+
+"""Input for creating a new API key."""
+input CreateApiKeyInput {
+  name: String!
+  scopes: [ApiKeyScope!]!
+  expiresAt: DateTime
+  rateLimitRpm: Int
+  rateLimitRpd: Int
+}
+
+"""Input for updating an API key."""
+input UpdateApiKeyInput {
+  name: String
+  scopes: [ApiKeyScope!]
+  expiresAt: DateTime
+  rateLimitRpm: Int
+  rateLimitRpd: Int
+  isActive: Boolean
+}
+
+"""Input for market data query."""
+input MarketDataInput {
+  symbol: String!
+  interval: MarketInterval!
+  dateRange: DateRangeInput
+  limit: Int
+}
+
+"""Input for batch content extraction."""
+input BatchContentInput {
+  items: [ContentExtractionInput!]!
+}
+
+# -----------------------------------------------------------------------
+# Mutation Payload Types
+# -----------------------------------------------------------------------
+
+"""Payload returned when creating an API key."""
+type CreateApiKeyPayload {
+  apiKey: ApiKey
+  secret: String
+  errors: [UserError!]
+}
+
+"""Payload returned when updating an API key."""
+type UpdateApiKeyPayload {
+  apiKey: ApiKey
+  errors: [UserError!]
+}
+
+"""Payload returned when deleting an API key."""
+type DeleteApiKeyPayload {
+  deletedApiKeyId: ID
+  errors: [UserError!]
+}
+
+"""Payload returned when submitting a research job."""
+type SubmitResearchJobPayload {
+  researchJob: ResearchJob
+  errors: [UserError!]
+}
+
+"""Payload returned when cancelling a research job."""
+type CancelResearchJobPayload {
+  researchJob: ResearchJob
+  errors: [UserError!]
+}
+
+"""A user-facing validation or business error."""
+type UserError {
+  field: String
+  message: String!
+  code: String
+}
+
+# -----------------------------------------------------------------------
+# Subscription Event Types
+# -----------------------------------------------------------------------
+
+"""A streaming event for a real-time search."""
+type SearchStreamEvent {
+  eventType: SearchEventType!
+  sessionId: ID!
+  result: SearchResult
+  answer: AIAnswer
+  citation: Citation
+  error: String
+  timestamp: DateTime!
+}
+
+"""A streaming chunk of an AI answer being generated."""
+type AnswerChunkEvent {
+  sessionId: ID!
+  chunk: String!
+  isFinal: Boolean!
+  timestamp: DateTime!
+}
+
+"""An event emitted when a research job changes status."""
+type ResearchJobEvent {
+  jobId: ID!
+  status: ResearchJobStatus!
+  progress: Float
+  report: ResearchReport
+  error: String
+  timestamp: DateTime!
+}
+
+# -----------------------------------------------------------------------
+# Query Root
+# -----------------------------------------------------------------------
+
+type Query {
+  """Perform a web search and return paginated results."""
+  search(input: SearchInput!, after: String, first: Int): SearchResultConnection!
+
+  """Get an AI-generated answer with citations for a query."""
+  aiAnswer(input: AIAnswerInput!): AIAnswer!
+
+  """Extract content from one or more URLs."""
+  extractContent(input: ContentExtractionInput!): [ExtractedContent!]!
+
+  """Search news articles with optional filters."""
+  searchNews(input: NewsSearchInput!, after: String, first: Int): NewsArticleConnection!
+
+  """Get a single news article by ID."""
+  newsArticle(id: ID!): NewsArticle
+
+  """Submit a finance research query and return a grounded answer."""
+  financeAnswer(input: FinanceResearchInput!): FinanceAnswer!
+
+  """Look up a financial instrument by symbol."""
+  financialInstrument(symbol: String!): FinancialInstrument
+
+  """Fetch market data for a symbol over a time range."""
+  marketData(input: MarketDataInput!): [MarketDataPoint!]!
+
+  """Get the status of a research job by ID."""
+  researchJob(id: ID!): ResearchJob
+
+  """List all research jobs for the authenticated account."""
+  researchJobs(status: ResearchJobStatus, after: String, first: Int): ResearchJobConnection!
+
+  """Get a completed research report by ID."""
+  researchReport(id: ID!): ResearchReport
+
+  """Get a citation by ID."""
+  citation(id: ID!): Citation
+
+  """Get the authenticated account's API keys."""
+  apiKeys(after: String, first: Int): ApiKeyConnection!
+
+  """Get a single API key by ID (secret not returned)."""
+  apiKey(id: ID!): ApiKey
+
+  """Get usage statistics for the authenticated account."""
+  usageStats(period: String, apiKeyId: ID): UsageStats!
+
+  """Get current rate limit status for the authenticated account."""
+  rateLimit(apiKeyId: ID): RateLimit!
+
+  """Get the current API health and status."""
+  apiStatus: ApiStatus!
+
+  """List active and recent status incidents."""
+  statusIncidents(resolved: Boolean, first: Int): [StatusIncident!]!
+
+  """Get a single status incident by ID."""
+  statusIncident(id: ID!): StatusIncident
+
+  """Auto-complete suggestions for a partial query."""
+  querySuggestions(query: String!, count: Int): [String!]!
+
+  """Related queries for a completed search."""
+  relatedQueries(query: String!, count: Int): [String!]!
+
+  """Trending topics in a given category and locale."""
+  trendingTopics(category: SearchCategory, country: CountryCode, count: Int): [String!]!
+}
+
+# -----------------------------------------------------------------------
+# Mutation Root
+# -----------------------------------------------------------------------
+
+type Mutation {
+  """Create a new API key for the authenticated account."""
+  createApiKey(input: CreateApiKeyInput!): CreateApiKeyPayload!
+
+  """Update an existing API key."""
+  updateApiKey(id: ID!, input: UpdateApiKeyInput!): UpdateApiKeyPayload!
+
+  """Revoke and delete an API key."""
+  deleteApiKey(id: ID!): DeleteApiKeyPayload!
+
+  """Submit a long-running deep research job."""
+  submitResearchJob(input: ResearchJobInput!): SubmitResearchJobPayload!
+
+  """Cancel a pending or running research job."""
+  cancelResearchJob(id: ID!): CancelResearchJobPayload!
+
+  """Batch-extract content from multiple URLs in a single call."""
+  batchExtractContent(input: BatchContentInput!): [ExtractedContent!]!
+}
+
+# -----------------------------------------------------------------------
+# Subscription Root
+# -----------------------------------------------------------------------
+
+type Subscription {
+  """Stream search results and AI answer chunks in real time."""
+  searchStream(input: SearchInput!): SearchStreamEvent!
+
+  """Stream individual answer chunks as they are generated."""
+  answerStream(input: AIAnswerInput!): AnswerChunkEvent!
+
+  """Receive status updates for a long-running research job."""
+  researchJobUpdates(jobId: ID!): ResearchJobEvent!
+
+  """Receive live news articles matching a query."""
+  liveNews(input: NewsSearchInput!): NewsArticle!
+
+  """Receive API status change notifications."""
+  apiStatusUpdates: ApiStatus!
+}

@@ -1,228 +1,222 @@
 aid: you-com
 name: You.com
-description: >-
-  You.com runs an AI search and chat product alongside a developer platform
-  that exposes web search APIs designed for AI systems, agents, and LLMs.
-  The platform offers Search, Web Search, Contents, News, Smart, Research,
-  and Finance Research APIs for grounding LLMs in real-time web data. You.com
-  publishes benchmark wins on DeepSearchQA and FinSearchComp and targets
-  300ms p99 latency with 99.99% uptime and SOC 2 enterprise controls. APIs
-  use X-API-Key authentication and a Python SDK is available. Free trial
-  access is provided through the platform dashboard with enterprise options
-  including zero data retention.
+description: You.com runs an AI search and chat product alongside a developer platform
+  that exposes web search APIs designed for AI systems, agents, and LLMs. The platform
+  offers Search, Web Search, Contents, News, Smart, Research, and Finance Research
+  APIs for grounding LLMs in real-time web data. You.com publishes benchmark wins
+  on DeepSearchQA and FinSearchComp and targets 300ms p99 latency with 99.99% uptime
+  and SOC 2 enterprise controls. APIs use X-API-Key authentication and a Python SDK
+  is available. Free trial access is provided through the platform dashboard with
+  enterprise options including zero data retention.
 type: Index
 position: Provider
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Search
-  - AI Search
-  - LLMs
-  - AI Agents
-  - Research
-  - News
-  - Finance
-  - Web Index
-  - Real-Time
-  - SOC 2
+- Search
+- AI Search
+- LLMs
+- AI Agents
+- Research
+- News
+- Finance
+- Web Index
+- Real-Time
+- SOC 2
 url: https://raw.githubusercontent.com/api-evangelist/you-com/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-23'
 specificationVersion: '0.20'
 apis:
-  - aid: you-com:search-api
-    name: You.com Search API
-    description: >-
-      The You.com Search API returns real-time web search results tailored for
-      AI agents and LLMs, with controls for freshness, category, and result
-      shape.
-    humanURL: https://you.com/docs
-    baseURL: https://api.you.com/v1
-    tags:
-      - Search
-      - Web Search
-      - Real-Time
-      - REST
-    properties:
-      - type: Documentation
-        url: https://you.com/docs
-      - type: GettingStarted
-        url: https://you.com/platform
-      - type: SignUp
-        url: https://you.com/platform
-      - type: APIReference
-        url: https://you.com/docs
-      - type: SDK
-        url: https://pypi.org/project/youdotcom/
-      - type: Pricing
-        url: https://you.com/platform
-      - type: Authentication
-        url: https://you.com/docs
-    features:
-      - name: Real-Time Search
-        description: Live web search results with snippets, URLs, and metadata for AI grounding.
-      - name: Category Filters
-        description: Filter results by category and freshness windows.
-      - name: Low Latency
-        description: Targeted 300ms p99 latency for interactive agent workloads.
-      - name: Enterprise Controls
-        description: SOC 2 certification, DPA support, and zero data retention options.
-    useCases:
-      - name: Agent Web Search Tool
-        description: Provide agents with a fast web search tool for grounding.
-      - name: Real-Time Q&A
-        description: Power chat experiences that need fresh web context.
-      - name: Knowledge Apps
-        description: Back knowledge applications with live web search.
-    integrations:
-      - name: LangChain
-      - name: LlamaIndex
-      - name: OpenAI
-      - name: Anthropic
-      - name: Vercel AI SDK
-    authentication:
-      - type: API Key
-        description: API key authentication via X-API-Key header.
-  - aid: you-com:contents-api
-    name: You.com Contents API
-    description: >-
-      The Contents API extracts clean, structured page content from one or
-      many URLs, returning text suitable for downstream LLM consumption.
-    humanURL: https://you.com/docs
-    baseURL: https://api.you.com/v1
-    tags:
-      - Contents
-      - Extraction
-      - Web
-    properties:
-      - type: Documentation
-        url: https://you.com/docs
-      - type: APIReference
-        url: https://you.com/docs
-      - type: Pricing
-        url: https://you.com/platform
-    features:
-      - name: Multi-URL Extraction
-        description: Submit multiple URLs and receive cleaned content per page.
-      - name: Structured Output
-        description: Structured fields for title, text, and metadata.
-      - name: Token-Efficient Output
-        description: Cleaned text reduces token usage for downstream LLM calls.
-    useCases:
-      - name: RAG Ingestion
-        description: Convert URLs into clean text for RAG ingestion pipelines.
-      - name: Agent Page Reading
-        description: Let agents read full pages returned by search results.
-      - name: Content Pipelines
-        description: Feed extraction output into summarization or analysis chains.
-    integrations:
-      - name: LangChain
-      - name: LlamaIndex
-      - name: Vercel AI SDK
-    authentication:
-      - type: API Key
-        description: API key authentication via X-API-Key header.
-  - aid: you-com:research-api
-    name: You.com Research API
-    description: >-
-      The Research API orchestrates multi-step web research to produce ranked,
-      cited responses to complex questions. It is benchmarked at the top of
-      DeepSearchQA.
-    humanURL: https://you.com/docs
-    baseURL: https://api.you.com/v1
-    tags:
-      - Research
-      - Agents
-      - Grounded
-      - LLMs
-    properties:
-      - type: Documentation
-        url: https://you.com/docs
-      - type: APIReference
-        url: https://you.com/docs
-      - type: Pricing
-        url: https://you.com/platform
-    features:
-      - name: Multi-Step Research
-        description: Decomposes complex questions into multi-step search and synthesis.
-      - name: Citations
-        description: Returns ranked sources with citations alongside the answer.
-      - name: Benchmark Leadership
-        description: Ranked first on the DeepSearchQA benchmark.
-    useCases:
-      - name: Deep Research Agents
-        description: Power research agents for analysts and knowledge workers.
-      - name: Q&A Copilots
-        description: Build copilots that answer complex factual questions with citations.
-      - name: Briefing Generation
-        description: Produce briefings from multi-source web research.
-    integrations:
-      - name: LangChain
-      - name: OpenAI
-      - name: Anthropic
-    authentication:
-      - type: API Key
-        description: API key authentication via X-API-Key header.
-  - aid: you-com:finance-research-api
-    name: You.com Finance Research API
-    description: >-
-      The Finance Research API specializes in financial intelligence,
-      returning sourced answers to investment and markets questions. Ranked
-      first on FinSearchComp.
-    humanURL: https://you.com/docs
-    baseURL: https://api.you.com/v1
-    tags:
-      - Finance
-      - Research
-      - Markets
-      - Grounded
-    properties:
-      - type: Documentation
-        url: https://you.com/docs
-      - type: APIReference
-        url: https://you.com/docs
-      - type: Pricing
-        url: https://you.com/platform
-    features:
-      - name: Finance-Tuned Retrieval
-        description: Retrieval and ranking tuned for financial sources and questions.
-      - name: Cited Answers
-        description: Returns answers with citations to financial sources.
-      - name: Benchmark Leadership
-        description: Ranked first on the FinSearchComp benchmark.
-    useCases:
-      - name: Investment Research Agents
-        description: Power agents that answer markets and equity questions.
-      - name: Equity Briefings
-        description: Generate company briefings with cited financial sources.
-      - name: Risk Monitoring
-        description: Monitor financial risk signals from public sources.
-    integrations:
-      - name: LangChain
-      - name: OpenAI
-      - name: Anthropic
-    authentication:
-      - type: API Key
-        description: API key authentication via X-API-Key header.
-common:
-  - type: Website
-    url: https://you.com
+- aid: you-com:search-api
+  name: You.com Search API
+  description: The You.com Search API returns real-time web search results tailored
+    for AI agents and LLMs, with controls for freshness, category, and result shape.
+  humanURL: https://you.com/docs
+  baseURL: https://api.you.com/v1
+  tags:
+  - Search
+  - Web Search
+  - Real-Time
+  - REST
+  properties:
   - type: Documentation
     url: https://you.com/docs
-  - type: Blog
-    url: https://you.com/blog
-  - type: GitHubOrganization
-    url: https://github.com/YouCom
+  - type: GettingStarted
+    url: https://you.com/platform
+  - type: SignUp
+    url: https://you.com/platform
+  - type: APIReference
+    url: https://you.com/docs
+  - type: SDK
+    url: https://pypi.org/project/youdotcom/
   - type: Pricing
     url: https://you.com/platform
-  - type: TermsOfService
-    url: https://about.you.com/terms-of-service/
-  - type: PrivacyPolicy
-    url: https://about.you.com/privacy-policy/
-  - type: X
-    url: https://x.com/youdotcom
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/youdotcom
+  - type: Authentication
+    url: https://you.com/docs
+  - url: graphql/you-com-graphql.md
+    type: GraphQL
+  features:
+  - name: Real-Time Search
+    description: Live web search results with snippets, URLs, and metadata for AI
+      grounding.
+  - name: Category Filters
+    description: Filter results by category and freshness windows.
+  - name: Low Latency
+    description: Targeted 300ms p99 latency for interactive agent workloads.
+  - name: Enterprise Controls
+    description: SOC 2 certification, DPA support, and zero data retention options.
+  useCases:
+  - name: Agent Web Search Tool
+    description: Provide agents with a fast web search tool for grounding.
+  - name: Real-Time Q&A
+    description: Power chat experiences that need fresh web context.
+  - name: Knowledge Apps
+    description: Back knowledge applications with live web search.
+  integrations:
+  - name: LangChain
+  - name: LlamaIndex
+  - name: OpenAI
+  - name: Anthropic
+  - name: Vercel AI SDK
+  authentication:
+  - type: API Key
+    description: API key authentication via X-API-Key header.
+- aid: you-com:contents-api
+  name: You.com Contents API
+  description: The Contents API extracts clean, structured page content from one or
+    many URLs, returning text suitable for downstream LLM consumption.
+  humanURL: https://you.com/docs
+  baseURL: https://api.you.com/v1
+  tags:
+  - Contents
+  - Extraction
+  - Web
+  properties:
+  - type: Documentation
+    url: https://you.com/docs
+  - type: APIReference
+    url: https://you.com/docs
+  - type: Pricing
+    url: https://you.com/platform
+  features:
+  - name: Multi-URL Extraction
+    description: Submit multiple URLs and receive cleaned content per page.
+  - name: Structured Output
+    description: Structured fields for title, text, and metadata.
+  - name: Token-Efficient Output
+    description: Cleaned text reduces token usage for downstream LLM calls.
+  useCases:
+  - name: RAG Ingestion
+    description: Convert URLs into clean text for RAG ingestion pipelines.
+  - name: Agent Page Reading
+    description: Let agents read full pages returned by search results.
+  - name: Content Pipelines
+    description: Feed extraction output into summarization or analysis chains.
+  integrations:
+  - name: LangChain
+  - name: LlamaIndex
+  - name: Vercel AI SDK
+  authentication:
+  - type: API Key
+    description: API key authentication via X-API-Key header.
+- aid: you-com:research-api
+  name: You.com Research API
+  description: The Research API orchestrates multi-step web research to produce ranked,
+    cited responses to complex questions. It is benchmarked at the top of DeepSearchQA.
+  humanURL: https://you.com/docs
+  baseURL: https://api.you.com/v1
+  tags:
+  - Research
+  - Agents
+  - Grounded
+  - LLMs
+  properties:
+  - type: Documentation
+    url: https://you.com/docs
+  - type: APIReference
+    url: https://you.com/docs
+  - type: Pricing
+    url: https://you.com/platform
+  features:
+  - name: Multi-Step Research
+    description: Decomposes complex questions into multi-step search and synthesis.
+  - name: Citations
+    description: Returns ranked sources with citations alongside the answer.
+  - name: Benchmark Leadership
+    description: Ranked first on the DeepSearchQA benchmark.
+  useCases:
+  - name: Deep Research Agents
+    description: Power research agents for analysts and knowledge workers.
+  - name: Q&A Copilots
+    description: Build copilots that answer complex factual questions with citations.
+  - name: Briefing Generation
+    description: Produce briefings from multi-source web research.
+  integrations:
+  - name: LangChain
+  - name: OpenAI
+  - name: Anthropic
+  authentication:
+  - type: API Key
+    description: API key authentication via X-API-Key header.
+- aid: you-com:finance-research-api
+  name: You.com Finance Research API
+  description: The Finance Research API specializes in financial intelligence, returning
+    sourced answers to investment and markets questions. Ranked first on FinSearchComp.
+  humanURL: https://you.com/docs
+  baseURL: https://api.you.com/v1
+  tags:
+  - Finance
+  - Research
+  - Markets
+  - Grounded
+  properties:
+  - type: Documentation
+    url: https://you.com/docs
+  - type: APIReference
+    url: https://you.com/docs
+  - type: Pricing
+    url: https://you.com/platform
+  features:
+  - name: Finance-Tuned Retrieval
+    description: Retrieval and ranking tuned for financial sources and questions.
+  - name: Cited Answers
+    description: Returns answers with citations to financial sources.
+  - name: Benchmark Leadership
+    description: Ranked first on the FinSearchComp benchmark.
+  useCases:
+  - name: Investment Research Agents
+    description: Power agents that answer markets and equity questions.
+  - name: Equity Briefings
+    description: Generate company briefings with cited financial sources.
+  - name: Risk Monitoring
+    description: Monitor financial risk signals from public sources.
+  integrations:
+  - name: LangChain
+  - name: OpenAI
+  - name: Anthropic
+  authentication:
+  - type: API Key
+    description: API key authentication via X-API-Key header.
+common:
+- type: Website
+  url: https://you.com
+- type: Documentation
+  url: https://you.com/docs
+- type: Blog
+  url: https://you.com/blog
+- type: GitHubOrganization
+  url: https://github.com/YouCom
+- type: Pricing
+  url: https://you.com/platform
+- type: TermsOfService
+  url: https://about.you.com/terms-of-service/
+- type: PrivacyPolicy
+  url: https://about.you.com/privacy-policy/
+- type: X
+  url: https://x.com/youdotcom
+- type: LinkedIn
+  url: https://www.linkedin.com/company/youdotcom
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
