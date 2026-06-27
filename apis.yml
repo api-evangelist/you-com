@@ -44,11 +44,11 @@ apis:
     url: https://you.com/docs
   - type: GettingStarted
     url: https://you.com/platform
-  - type: SignUp
+  - type: Signup
     url: https://you.com/platform
   - type: APIReference
     url: https://you.com/docs
-  - type: SDK
+  - type: SDKs
     url: https://pypi.org/project/youdotcom/
   - type: Pricing
     url: https://you.com/platform
