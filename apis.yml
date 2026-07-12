@@ -199,6 +199,10 @@ apis:
   - type: API Key
     description: API key authentication via X-API-Key header.
 common:
+- type: VulnerabilityDisclosure
+  url: security/you-com-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/you-com-domain-security.yml
 - type: Website
   url: https://you.com
 - type: Documentation
