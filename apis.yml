@@ -9,6 +9,17 @@ description: You.com runs an AI search and chat product alongside a developer pl
   is available. Free trial access is provided through the platform dashboard with
   enterprise options including zero data retention.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
