@@ -38,6 +38,17 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/you-com.pn
 tags:
 - Search
 - AI Search
+- LLM
+- AI Agents
+- Research
+- News
+- Finance
+- Web Index
+- Real-Time
+- SOC 2
+tags_raw:
+- Search
+- AI Search
 - LLMs
 - AI Agents
 - Research
@@ -150,6 +161,11 @@ apis:
   humanURL: https://you.com/docs
   baseURL: https://api.you.com/v1
   tags:
+  - Research
+  - Agents
+  - Grounded
+  - LLM
+  tags_raw:
   - Research
   - Agents
   - Grounded
