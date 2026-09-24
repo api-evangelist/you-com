@@ -88,8 +88,6 @@ apis:
     url: https://you.com/platform
   - type: Authentication
     url: https://you.com/docs
-  - url: graphql/you-com-graphql.md
-    type: GraphQL
   features:
   - name: Real-Time Search
     description: Live web search results with snippets, URLs, and metadata for AI
