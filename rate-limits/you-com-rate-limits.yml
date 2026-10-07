@@ -1,61 +1,55 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: You.com
-providerId: you-com
-created: '2026-05-22'
-modified: '2026-05-22'
-tags:
-- Search
-- AI Search
-- LLMs
-- AI Agents
-- Research
-- News
-- Finance
-- Web Index
-- Real-Time
-- SOC 2
-- Rate Limiting
-- Quotas
-- Throttling
-description: Scaffolded rate limit definitions for the You.com API surface. Captures per-tier quotas, burst behavior, response
-  signaling, and recovery semantics. Defaults are scaffold values to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://you.com/docs/rate-limits
+sources:
+- https://you.com/docs/rate-limits
+provenance:
+  tool: all/0-working/economics/harvest_ratelimits.py
+  run: 20261007T122905
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Per-endpoint per-second defaults for self-serve accounts; enterprise plans use custom contract limits.
+limit_count: 5
 limits:
-- tier: free
-  name: Free Tier Default
-  scope: api-key
-  metric: requests_per_minute
+- name: Web Search API default limit
+  limit_text: 10 requests/second
   limit: 10
-  burst: 20
-  timeFrame: minute
-  applies:
-  - https://api.you.com/v1
-  description: Default per-token request rate for the free tier. Bursts above the limit return HTTP 429 with Retry-After.
-- tier: pro
-  name: Pro Tier Default
-  scope: api-key
-  metric: requests_per_minute
-  limit: 120
-  burst: 240
-  timeFrame: minute
-  applies:
-  - https://api.you.com/v1
-  description: Higher rate envelope for paid plans; reconcile against published commercial terms.
-recoveryStrategies:
-- name: Exponential Backoff
-  description: Wait Retry-After seconds (or back off exponentially up to 60s) before retrying.
-- name: Queue and Retry
-  description: Submit bulk work in batches under the burst envelope.
-notes:
-- Replace scaffold values with the provider's published rate limit policy.
+  window: second
+  scope: endpoint
+  plan: self-serve
+  endpoint: /v1/search
+- name: Contents API default limit
+  limit_text: 10 requests/second
+  limit: 10
+  window: second
+  scope: endpoint
+  plan: self-serve
+  endpoint: /v1/contents
+- name: Answer API default limit
+  limit_text: 10 requests/second
+  limit: 10
+  window: second
+  scope: endpoint
+  plan: self-serve
+  endpoint: /v1/answer
+- name: Research API default limit
+  limit_text: 10 requests/second
+  limit: 10
+  window: second
+  scope: endpoint
+  plan: self-serve
+  endpoint: /v1/research
+- name: Finance Research API default limit
+  limit_text: 5 requests/second
+  limit: 5
+  window: second
+  scope: endpoint
+  plan: self-serve
+  endpoint: /v1/finance_research
+headers:
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+- Retry-After
+exceeded_status: 429

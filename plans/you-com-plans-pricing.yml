@@ -1,55 +1,30 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: You.com
-providerId: you-com
-created: '2026-05-22'
-modified: '2026-05-22'
-tags:
-- Search
-- AI Search
-- LLMs
-- AI Agents
-- Research
-- News
-- Finance
-- Web Index
-- Real-Time
-- SOC 2
-description: Machine-readable plans scaffold for the You.com API surface. Conforms to the API Commons Plans schema. Tier limits
-  and prices are scaffold defaults; replace with provider-published values.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://you.com/signin?redirectUrl=%2Fplatform
+sources:
+- https://you.com/signin?redirectUrl=%2Fplatform
+- https://you.com/platform
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T113201
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+published: true
+note: 'Sign-in page for the You.com platform. Only credit grants are stated: $10 initial API credits plus
+  $90 on verification; page states "$100 covers 20,000 Web Search API calls". No tier or per-unit price
+  list shown.'
+plan_count: 1
+currency: USD
 plans:
-- id: you-com-free
-  name: Free
-  type: freemium
-  description: Free entry tier for the You.com API surface. Intended for evaluation, prototyping, and low-volume integrations.
-    Real limits and pricing must be reconciled with the provider's published plan documentation.
-  entries:
-  - label: API Requests
-    description: Monthly API request quota across all included endpoints
-    name: api_requests
-    type: quota
-    metric: requests
-    limit: 1000
-    timeFrame: month
-    geo: global
-    domains:
-    - https://api.you.com/v1
-    unit: 1
-    price: '0.00'
-    userMultiplied: false
-  - label: Rate Limit
-    description: Maximum requests per minute on the free tier
-    name: rate_limit
-    type: rate
-    metric: requests_per_minute
-    limit: 10
-    timeFrame: minute
-    geo: global
-    domains:
-    - https://api.you.com/v1
-    unit: 1
-    price: '0.00'
-references:
-- name: You.com API Documentation
-  url: https://raw.githubusercontent.com/api-evangelist/you-com/refs/heads/main/apis.yml
+- name: New account starting credits
+  price_text: Start with $10. Get $90 more when you verify.
+  currency: USD
+  period: one-time
+  unit: API credits
+  included_quota: $10 in API credits; additional $90 after verifying with GitHub or a work email
