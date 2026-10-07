@@ -236,6 +236,10 @@ apis:
   - type: API Key
     description: API key authentication via X-API-Key header.
 common:
+- type: RateLimits
+  url: rate-limits/you-com-rate-limits.yml
+- type: Plans
+  url: plans/you-com-plans-pricing.yml
 - type: VulnerabilityDisclosure
   url: security/you-com-vulnerability-disclosure.yml
 - type: DomainSecurity
