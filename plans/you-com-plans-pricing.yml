@@ -28,3 +28,19 @@ plans:
   period: one-time
   unit: API credits
   included_quota: $10 in API credits; additional $90 after verifying with GitHub or a work email
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units:
+  - credit
+  plans:
+  - name: New account starting credits
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - one-time
