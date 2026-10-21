@@ -15,38 +15,6 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
-- slug: you-com-stripe-own
-  label: Stripe (own)
-  partner: stripe
-  partner_name: Stripe (own)
-  category: developer_tools
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://marketplace.stripe.com/apps/youcom
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: you-com-mcp-registry
-  label: MCP Registry
-  partner: mcp
-  partner_name: MCP Registry
-  type: register
-  channel: standard-directory
-  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=io.github.youdotcom-oss
-  source: edge
-  relationship: standard-participant
-  contract_reference:
-    register: registry.modelcontextprotocol.io
-    spec_file: null
-    role: mcp-server-listing
-    registered_name: io.github.youdotcom-oss/mcp
-    register_id: io.github.youdotcom-oss/mcp
-    detected_by: sweep-agent-tools.py
-    detected: '2026-10-15'
-  status: not-a-workflow
-  arazzo: null
 - slug: you-com-zapier
   label: Zapier
   partner: zapier
@@ -70,5 +38,50 @@
     app_slug: youcom
     beta: false
     builder: unknown (not in the directory record)
+  status: not-a-workflow
+  arazzo: null
+- slug: you-com-mcp-registry
+  label: MCP Registry
+  partner: mcp
+  partner_name: MCP Registry
+  type: register
+  channel: standard-directory
+  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=io.github.youdotcom-oss
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: registry.modelcontextprotocol.io
+    spec_file: null
+    role: mcp-server-listing
+    registered_name: io.github.youdotcom-oss/mcp
+    register_id: io.github.youdotcom-oss/mcp
+    detected_by: sweep-agent-tools.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: you-com-stripe-own
+  label: Stripe (own)
+  partner: stripe
+  partner_name: Stripe (own)
+  category: developer_tools
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.stripe.com/apps/youcom
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: you-com-jetbrains-jetbrains-marketplace
+  label: JetBrains (jetbrains-marketplace)
+  partner: jetbrains
+  partner_name: JetBrains (jetbrains-marketplace)
+  category: IDE / developer extension marketplace listing
+  type: marketplace
+  marketplace: jetbrains-marketplace
+  channel: partner-built
+  evidence: https://plugins.jetbrains.com/vendor/You-OpenSource
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
