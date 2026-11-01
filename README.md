@@ -1,4 +1,4 @@
-# you-com
+# You.com
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,4 +64,125 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-You.com — AI search and chat with developer APIs
+You.com runs an AI search and chat product alongside a developer platform that exposes web search APIs designed for AI systems, agents, and LLMs. The platform offers Search, Web Search, Contents, News, Smart, Research, and Finance Research APIs for grounding LLMs in real-time web data. You.com publishes benchmark wins on DeepSearchQA and FinSearchComp and targets 300ms p99 latency with 99.99% uptime and SOC 2 enterprise controls. APIs use X-API-Key authentication and a Python SDK is available. Free trial access is provided through the platform dashboard with enterprise options including zero data retention.
+
+**Areas:** Search · AI Search · LLM · AI Agents · Research · News · Finance · Web Index · Real-Time · SOC 2
+
+## You.com on APIs.io
+
+Everything profiled for You.com is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/you-com/](https://apis.io/providers/you-com/)** — or go straight to one of the APIs or properties below.
+
+### APIs (4)
+
+- [You.com Search API](https://apis.io/apis/you-com/search-api/) — The You.com Search API returns real-time web search results tailored for AI agents and LLMs, with controls for freshness, category, and result shape.
+- [You.com Contents API](https://apis.io/apis/you-com/contents-api/) — The Contents API extracts clean, structured page content from one or many URLs, returning text suitable for downstream LLM consumption.
+- [You.com Research API](https://apis.io/apis/you-com/research-api/) — The Research API orchestrates multi-step web research to produce ranked, cited responses to complex questions. It is benchmarked at the top of DeepSearchQA.
+- [You.com Finance Research API](https://apis.io/apis/you-com/finance-research-api/) — The Finance Research API specializes in financial intelligence, returning sourced answers to investment and markets questions. Ranked first on FinSearchComp.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/you-com/](https://apis.io/graphqls/you-com/you-com-graphql/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [you-com](https://apis.io/servers/you-com/you-com/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [You Com Domain Security](https://apis.io/security/you-com/you-com-domain-security/)
+- [You Com Vulnerability Disclosure](https://apis.io/security/you-com/you-com-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [You Com Plans Pricing](https://apis.io/plans/you-com/you-com-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [You Com Rate Limits](https://apis.io/rate-limits/you-com/you-com-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [You Com Finops](https://apis.io/finops/you-com/you-com-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://you.com)
+- [Documentation](https://you.com/docs)
+- [Pricing](https://you.com/platform)
+- [Blog](https://you.com/blog)
+- [Terms of service](https://about.you.com/terms-of-service/)
+- [Privacy policy](https://about.you.com/privacy-policy/)
+- [GitHub](https://github.com/YouCom)
+
+## API Evangelist rating
+
+**Kin Score 27.8** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.3 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 34.2 |
+
+**Agent readiness 17.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 16.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/you-com/](https://apis.io/providers/you-com/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for You.com: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/you-com/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
